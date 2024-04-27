@@ -1,0 +1,46 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Areas.Admin.Models.CategoryAdminViewModel
+
+@{
+    if (Model.Name != null)
+    {
+        ViewBag.Title = "Edit " + Model.Name;
+    }
+    else
+    {
+        ViewBag.Title = "New category";
+    }
+
+}
+
+@if (Model.Name != null)
+{
+    <h1>Edit @Model.Name</h1>
+}
+@if (Model.Name == null)
+{
+    <h1>New category</h1>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled", id = "validation-summary" })
+    <hr />
+    @Html.HiddenFor(model => model.Id)
+
+    @Html.TextBoxForExtended(model => model.Name)
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.Description, new { @class = "input-group-text" })
+        </div>
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+    </div>
+
+    @Html.EndingFormButtons()
+}
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+}

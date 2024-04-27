@@ -1,0 +1,90 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Areas.Admin.Models.ProductAdminViewModel
+
+@{
+    ViewBag.Title = "Details " + Model.Name;
+}
+
+<h1>Details @Model.Name</h1>
+
+<p>
+    @Html.ActionLink("Go Back", "GoBack", "Home", new { area = "" }, new { @class = "btn btn-primary text-white" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
+</p>
+
+<div class="d-md-flex flex-nowrap">
+    <div class="w-auto mr-2">
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.Created)</dt>
+            <dd>@Html.DisplayFor(model => model.Created)</dd>
+
+            @if (Model.Edited != null)
+            {
+                <dt>@Html.DisplayNameFor(model => model.Edited)</dt>
+                if (Model.Edited.ToString() == "1/1/0001 1:00:00 AM")
+                {
+                    <dd>- None -</dd>
+                }
+                else
+                {
+                    <dd>@Html.DisplayFor(model => model.Edited.Value)</dd>
+                }
+            }
+        </dl>
+
+        <img id="ImgPreview" class="d-block img-max-size"
+             src="@Url.Action("GetImage", "ProductAdmin", new { Model.Id })" />
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.CatalogNumber)</dt>
+            @if (Model.CatalogNumber == null)
+            {
+                <dd>- None -</dd>
+            }
+            else
+            {
+                <dd>@Html.DisplayFor(model => model.CatalogNumber)</dd>
+            }
+        </dl>
+    </div>
+    <div class="w-75">
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.Price)</dt>
+            <dd class="border-bottom">@Html.DisplayFor(model => model.Price) @Html.Settings().Currency</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.NumberInStock)</dt>
+            <dd class="border-bottom">@Html.DisplayFor(model => model.NumberInStock)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.CategoryId)</dt>
+            <dd class="border-bottom">@Html.DisplayFor(model => model.CategoryName)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.SubcategoryId)</dt>
+            @if (Model.SubcategoryName == null)
+            {
+                <dd class="border-bottom">- None -</dd>
+            }
+            else
+            {
+                <dd class="border-bottom">@Html.DisplayFor(model => model.SubcategoryName)</dd>
+            }
+
+            <dt>@Html.DisplayNameFor(model => model.ShowAsSpecialOffer)</dt>
+            <dd class="border-bottom">@Model.ShowAsSpecialOffer</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.ShowAtMainPage)</dt>
+            <dd class="border-bottom">@Model.ShowAtMainPage</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+            @if (Model.Description == null)
+            {
+                <dd>- None -</dd>
+            }
+            else
+            {
+                <dd class="">@Html.DisplayFor(model => model.Description)</dd>
+            }
+        </dl>
+    </div>
+</div>

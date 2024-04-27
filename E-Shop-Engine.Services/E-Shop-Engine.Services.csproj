@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C465D03-447E-4FE6-8781-7F8BA8DEF154}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>E_Shop_Engine.Services</RootNamespace>
+    <AssemblyName>E-Shop-Engine.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.Owin.4.0.1\lib\net45\Autofac.Integration.Mvc.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.4.2.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.StackTrace, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.StackTrace.4.3.0\lib\net46\System.Diagnostics.StackTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Data\AppDbContext.cs" />
+    <Compile Include="Data\EntitiesConfigurations\AddressEntityConfig.cs" />
+    <Compile Include="Data\EntitiesConfigurations\CartEntityConfig.cs" />
+    <Compile Include="Data\EntitiesConfigurations\CartLineEntityConfig.cs" />
+    <Compile Include="Data\EntitiesConfigurations\CategoryEntityConfig.cs" />
+    <Compile Include="Data\EntitiesConfigurations\UserEntityConfig.cs" />
+    <Compile Include="Data\EntitiesConfigurations\OrderEntityConfig.cs" />
+    <Compile Include="Data\EntitiesConfigurations\ProductEntityConfig.cs" />
+    <Compile Include="Data\EntitiesConfigurations\SubcategoryEntityConfig.cs" />
+    <Compile Include="Data\Identity\Abstraction\IAppUserManager.cs" />
+    <Compile Include="Data\Identity\AppRoleManager.cs" />
+    <Compile Include="Data\Identity\AppSignInManager.cs" />
+    <Compile Include="Data\Identity\AppUserManager.cs" />
+    <Compile Include="Data\Identity\AppUserStore.cs" />
+    <Compile Include="Migrations\201808072054560_Init.cs" />
+    <Compile Include="Migrations\201808072054560_Init.Designer.cs">
+      <DependentUpon>201808072054560_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808191919027_Add SpecialOffer prop to Product.cs" />
+    <Compile Include="Migrations\201808191919027_Add SpecialOffer prop to Product.Designer.cs">
+      <DependentUpon>201808191919027_Add SpecialOffer prop to Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808201931322_Edit SpecialOffer prop at Product.cs" />
+    <Compile Include="Migrations\201808201931322_Edit SpecialOffer prop at Product.Designer.cs">
+      <DependentUpon>201808201931322_Edit SpecialOffer prop at Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808242047499_Product - switch Subcategory to nullable.cs" />
+    <Compile Include="Migrations\201808242047499_Product - switch Subcategory to nullable.Designer.cs">
+      <DependentUpon>201808242047499_Product - switch Subcategory to nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808261606559_Add Dates To Product.cs" />
+    <Compile Include="Migrations\201808261606559_Add Dates To Product.Designer.cs">
+      <DependentUpon>201808261606559_Add Dates To Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808262017113_Fixed Fluent API.cs" />
+    <Compile Include="Migrations\201808262017113_Fixed Fluent API.Designer.cs">
+      <DependentUpon>201808262017113_Fixed Fluent API.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280821498_Setup Cart and Orders.cs" />
+    <Compile Include="Migrations\201808280821498_Setup Cart and Orders.Designer.cs">
+      <DependentUpon>201808280821498_Setup Cart and Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280833076_Connect Cart with Customer.cs" />
+    <Compile Include="Migrations\201808280833076_Connect Cart with Customer.Designer.cs">
+      <DependentUpon>201808280833076_Connect Cart with Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808290731483_Customer add Created datetime.cs" />
+    <Compile Include="Migrations\201808290731483_Customer add Created datetime.Designer.cs">
+      <DependentUpon>201808290731483_Customer add Created datetime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809071912295_Identity setup.cs" />
+    <Compile Include="Migrations\201809071912295_Identity setup.Designer.cs">
+      <DependentUpon>201809071912295_Identity setup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809121231148_Migrate Address from AppUser to Order.cs" />
+    <Compile Include="Migrations\201809121231148_Migrate Address from AppUser to Order.Designer.cs">
+      <DependentUpon>201809121231148_Migrate Address from AppUser to Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809121935096_Update navigation properties.cs" />
+    <Compile Include="Migrations\201809121935096_Update navigation properties.Designer.cs">
+      <DependentUpon>201809121935096_Update navigation properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809141234343_Re-configuration Orders and Carts relationship.cs" />
+    <Compile Include="Migrations\201809141234343_Re-configuration Orders and Carts relationship.Designer.cs">
+      <DependentUpon>201809141234343_Re-configuration Orders and Carts relationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809141244172_Update Cart and CartLine config.cs" />
+    <Compile Include="Migrations\201809141244172_Update Cart and CartLine config.Designer.cs">
+      <DependentUpon>201809141244172_Update Cart and CartLine config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809141340538_Setup Composite Key for CartLines.cs" />
+    <Compile Include="Migrations\201809141340538_Setup Composite Key for CartLines.Designer.cs">
+      <DependentUpon>201809141340538_Setup Composite Key for CartLines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809141801033_Move Address to AppUser.cs" />
+    <Compile Include="Migrations\201809141801033_Move Address to AppUser.Designer.cs">
+      <DependentUpon>201809141801033_Move Address to AppUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809151958011_Fix AppRole table.cs" />
+    <Compile Include="Migrations\201809151958011_Fix AppRole table.Designer.cs">
+      <DependentUpon>201809151958011_Fix AppRole table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809170736494_Fix AppUser Id generation.cs" />
+    <Compile Include="Migrations\201809170736494_Fix AppUser Id generation.Designer.cs">
+      <DependentUpon>201809170736494_Fix AppUser Id generation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810101728266_Add Settings table.cs" />
+    <Compile Include="Migrations\201810101728266_Add Settings table.Designer.cs">
+      <DependentUpon>201810101728266_Add Settings table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810171847169_Update OrderedCartLine table.cs" />
+    <Compile Include="Migrations\201810171847169_Update OrderedCartLine table.Designer.cs">
+      <DependentUpon>201810171847169_Update OrderedCartLine table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810171901584_Cascade delete on Products and OrderedCartLine.cs" />
+    <Compile Include="Migrations\201810171901584_Cascade delete on Products and OrderedCartLine.Designer.cs">
+      <DependentUpon>201810171901584_Cascade delete on Products and OrderedCartLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810212028369_Update Settings.cs" />
+    <Compile Include="Migrations\201810212028369_Update Settings.Designer.cs">
+      <DependentUpon>201810212028369_Update Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811032050258_Add dotpay settings.cs" />
+    <Compile Include="Migrations\201811032050258_Add dotpay settings.Designer.cs">
+      <DependentUpon>201811032050258_Add dotpay settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811092129582_Update Order.cs" />
+    <Compile Include="Migrations\201811092129582_Update Order.Designer.cs">
+      <DependentUpon>201811092129582_Update Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811112053067_Add Payment prop at Order.cs" />
+    <Compile Include="Migrations\201811112053067_Add Payment prop at Order.Designer.cs">
+      <DependentUpon>201811112053067_Add Payment prop at Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811112214582_Remove sensitive data from Settings.cs" />
+    <Compile Include="Migrations\201811112214582_Remove sensitive data from Settings.Designer.cs">
+      <DependentUpon>201811112214582_Remove sensitive data from Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811222005319_Simplify Cart and Order.cs" />
+    <Compile Include="Migrations\201811222005319_Simplify Cart and Order.Designer.cs">
+      <DependentUpon>201811222005319_Simplify Cart and Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811232103421_Fix cascade delete on orders, carts, products, users.cs" />
+    <Compile Include="Migrations\201811232103421_Fix cascade delete on orders, carts, products, users.Designer.cs">
+      <DependentUpon>201811232103421_Fix cascade delete on orders, carts, products, users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811232147151_Make product id prop out of model from CartLines.cs" />
+    <Compile Include="Migrations\201811232147151_Make product id prop out of model from CartLines.Designer.cs">
+      <DependentUpon>201811232147151_Make product id prop out of model from CartLines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811232225144_Add IsORdered prop at Carts.cs" />
+    <Compile Include="Migrations\201811232225144_Add IsORdered prop at Carts.Designer.cs">
+      <DependentUpon>201811232225144_Add IsORdered prop at Carts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902141949265_Change PaymentMethod to string at Orders table.cs" />
+    <Compile Include="Migrations\201902141949265_Change PaymentMethod to string at Orders table.Designer.cs">
+      <DependentUpon>201902141949265_Change PaymentMethod to string at Orders table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902142033351_Add Sandbox boolean to Settings.cs" />
+    <Compile Include="Migrations\201902142033351_Add Sandbox boolean to Settings.Designer.cs">
+      <DependentUpon>201902142033351_Add Sandbox boolean to Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="NLogConfig.cs" />
+    <Compile Include="Services\Payment\DotPay\DotPayPaymentService.cs" />
+    <Compile Include="Services\Payment\DotPay\IDotPayPaymentService.cs" />
+    <Compile Include="Services\Payment\DotPay\Models\DotPayPaymentDetails.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\CartRepository.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Services\MailingService.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SettingsRepository.cs" />
+    <Compile Include="Repositories\SubcategoryRepository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Services\GetErrorMessage.cs" />
+    <Compile Include="Services\Payment\PaymentService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\E-Shop-Engine.Domain\E-Shop-Engine.Domain.csproj">
+      <Project>{6890D687-0482-4C31-A1A4-51409224F01A}</Project>
+      <Name>E-Shop-Engine.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\E-Shop-Engine.Utilities\E-Shop-Engine.Utilities.csproj">
+      <Project>{44BA2192-129A-4D41-B03F-072940900CF5}</Project>
+      <Name>E-Shop-Engine.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808072054560_Init.resx">
+      <DependentUpon>201808072054560_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808191919027_Add SpecialOffer prop to Product.resx">
+      <DependentUpon>201808191919027_Add SpecialOffer prop to Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808201931322_Edit SpecialOffer prop at Product.resx">
+      <DependentUpon>201808201931322_Edit SpecialOffer prop at Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808242047499_Product - switch Subcategory to nullable.resx">
+      <DependentUpon>201808242047499_Product - switch Subcategory to nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808261606559_Add Dates To Product.resx">
+      <DependentUpon>201808261606559_Add Dates To Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808262017113_Fixed Fluent API.resx">
+      <DependentUpon>201808262017113_Fixed Fluent API.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280821498_Setup Cart and Orders.resx">
+      <DependentUpon>201808280821498_Setup Cart and Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280833076_Connect Cart with Customer.resx">
+      <DependentUpon>201808280833076_Connect Cart with Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808290731483_Customer add Created datetime.resx">
+      <DependentUpon>201808290731483_Customer add Created datetime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809071912295_Identity setup.resx">
+      <DependentUpon>201809071912295_Identity setup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809121231148_Migrate Address from AppUser to Order.resx">
+      <DependentUpon>201809121231148_Migrate Address from AppUser to Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809121935096_Update navigation properties.resx">
+      <DependentUpon>201809121935096_Update navigation properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809141234343_Re-configuration Orders and Carts relationship.resx">
+      <DependentUpon>201809141234343_Re-configuration Orders and Carts relationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809141244172_Update Cart and CartLine config.resx">
+      <DependentUpon>201809141244172_Update Cart and CartLine config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809141340538_Setup Composite Key for CartLines.resx">
+      <DependentUpon>201809141340538_Setup Composite Key for CartLines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809141801033_Move Address to AppUser.resx">
+      <DependentUpon>201809141801033_Move Address to AppUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809151958011_Fix AppRole table.resx">
+      <DependentUpon>201809151958011_Fix AppRole table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809170736494_Fix AppUser Id generation.resx">
+      <DependentUpon>201809170736494_Fix AppUser Id generation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810101728266_Add Settings table.resx">
+      <DependentUpon>201810101728266_Add Settings table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171847169_Update OrderedCartLine table.resx">
+      <DependentUpon>201810171847169_Update OrderedCartLine table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171901584_Cascade delete on Products and OrderedCartLine.resx">
+      <DependentUpon>201810171901584_Cascade delete on Products and OrderedCartLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810212028369_Update Settings.resx">
+      <DependentUpon>201810212028369_Update Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811032050258_Add dotpay settings.resx">
+      <DependentUpon>201811032050258_Add dotpay settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811092129582_Update Order.resx">
+      <DependentUpon>201811092129582_Update Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811112053067_Add Payment prop at Order.resx">
+      <DependentUpon>201811112053067_Add Payment prop at Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811112214582_Remove sensitive data from Settings.resx">
+      <DependentUpon>201811112214582_Remove sensitive data from Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811222005319_Simplify Cart and Order.resx">
+      <DependentUpon>201811222005319_Simplify Cart and Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811232103421_Fix cascade delete on orders, carts, products, users.resx">
+      <DependentUpon>201811232103421_Fix cascade delete on orders, carts, products, users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811232147151_Make product id prop out of model from CartLines.resx">
+      <DependentUpon>201811232147151_Make product id prop out of model from CartLines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811232225144_Add IsORdered prop at Carts.resx">
+      <DependentUpon>201811232225144_Add IsORdered prop at Carts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902141949265_Change PaymentMethod to string at Orders table.resx">
+      <DependentUpon>201902141949265_Change PaymentMethod to string at Orders table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902142033351_Add Sandbox boolean to Settings.resx">
+      <DependentUpon>201902142033351_Add Sandbox boolean to Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EmailTemplates\OneButtonTemplateMail.html" />
+    <Content Include="EmailTemplates\OnlyTextTemplateMail.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

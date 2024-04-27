@@ -1,0 +1,119 @@
+﻿@using E_Shop_Engine.Utilities.Extensions;
+@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Areas.Admin.Models.OrderAdminViewModel
+
+@{
+    ViewBag.Title = "Order " + Model.OrderNumber + " Details";
+}
+
+<h1>Order @Model.OrderNumber Details</h1>
+
+<p>
+    @Html.ActionLink("Go Back", "GoBack", "Home", new { area = "" }, new { @class = "btn btn-primary text-white" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary" })
+</p>
+
+<div class="d-flex flex-nowrap">
+    <div class="w-auto mr-2 border-right border-primary">
+        <dl class="clickable-row pointer" data-href="/Admin/Account/Details/@Model.AppUser.Id">
+            <dt>User Id</dt>
+            <dd>@Html.DisplayFor(model => model.AppUser.Id)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.AppUser.Name) @Html.DisplayNameFor(model => model.AppUser.Surname)</dt>
+            <dd>@Html.DisplayFor(model => model.AppUser.Name) @Html.DisplayFor(model => model.AppUser.Surname)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.AppUser.Email)</dt>
+            <dd>@Html.DisplayFor(model => model.AppUser.Email)</dd>
+        </dl>
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.OrderNumber)</dt>
+            <dd>@Html.DisplayFor(model => model.OrderNumber)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Created)</dt>
+            <dd>@Html.DisplayFor(model => model.Created)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Finished)</dt>
+            <dd>@Html.DisplayFor(model => model.Finished)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.IsPaid)</dt>
+            <dd>@Html.DisplayFor(model => model.IsPaid)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.OrderStatus)</dt>
+            <dd>
+                @{
+                    var orderStatus = Model.OrderStatus.GetDisplayName();
+                    orderStatus = orderStatus == null ? Model.OrderStatus.ToString() : orderStatus;
+                }
+                @Html.DisplayFor(model => orderStatus)
+            </dd>
+
+            <dt>@Html.DisplayNameFor(model => model.PaymentMethod)</dt>
+            <dd>
+                @{
+                    var name = Model.PaymentMethod.GetDisplayName();
+                    name = name == null ? Model.PaymentMethod.ToString() : name;
+                }
+                @Html.DisplayFor(model => name)
+            </dd>
+            <dt>@Html.DisplayNameFor(model => model.TransactionNumber)</dt>
+            <dd>@Html.DisplayFor(model => model.TransactionNumber)</dd>
+        </dl>
+    </div>
+    <div class="w-74 table-responsive">
+        <table class="table table-striped table-hover table-light text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">
+                        Catalog Number
+                    </th>
+                    <th scope="col">
+                        Name
+                    </th>
+                    <th scope="col">
+                        Quantity
+                    </th>
+                    <th scope="col">
+                        Price
+                    </th>
+                    <th scope="col">
+                        Value
+                    </th>
+                    <th scope="col">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Cart.CartLines)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.CatalogNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Price) @Html.Settings().Currency
+                        </td>
+                        <td>
+                            @(item.Product.Price * item.Quantity) @Html.Settings().Currency
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", "ProductAdmin", new { id = item.Product.ID }, new { @class = "btn btn-info btn-sm mb-1" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h3>Total value: @Model.Payment @Html.Settings().Currency</h3>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/custom/clickable-row.js" type="text/javascript"></script>
+}

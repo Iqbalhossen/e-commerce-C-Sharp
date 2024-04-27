@@ -1,0 +1,85 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.list-unstyled ul{
+    list-style: none;
+}
+
+.input-validation-error {
+    border: 1px solid #dc3545 !important;
+}
+
+    .input-validation-error:focus {
+        border: 1px solid #dc3545 !important;
+        box-shadow: 0 0 0 .2rem rgba(220,53,69,.25) !important;
+    }
+
+.mw-min {
+    max-width: min-content;
+}
+
+.btn {
+    white-space: normal !important; 
+    word-wrap: break-word; 
+    word-break: normal;
+}
+
+.dropright:hover > .dropdown-menu {
+    display: block;
+}
+
+#content {
+    width: 80%;
+}
+
+.card-img-top {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+#ImgPreview {
+    width: auto !important;
+}
+
+.card .w-100 {
+    text-align: center;
+}
+
+.card-columns a {
+    text-decoration: none;
+    color: black;
+}
+
+.h-90-vh {
+    height: 80vh;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.img-max-size {
+    max-width: 100%;
+    max-height: 300px;
+}
+
+#contactForm {
+    min-width: 300px;
+}
+
+#dotpayLink {
+    max-width: 200px;
+}
+
+.payment-img {
+    max-width: 100px;
+    max-height: 100px;
+}

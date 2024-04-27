@@ -1,0 +1,27 @@
+﻿@model IEnumerable<E_Shop_Engine.Website.Models.CategoryViewModel>
+
+@{
+    Layout = null;
+}
+
+<nav class="nav flex-column bg-primary w-auto mr-2 mw-min">
+    @foreach (var item in Model)
+    {
+        if (item.Subcategories.Count != 0)
+        {
+            <div class="dropright">
+                @Html.ActionLink(item.Name, "Details", "Category", new { id = item.Id, name = item.Name }, new { @class = "nav-link text-white btn btn-primary dropdown-toggle" })
+                <div class="dropdown-menu bg-primary">
+                    @foreach (var subcategory in item.Subcategories)
+                    {
+                        @Html.ActionLink(subcategory.Name, "Details", "Subcategory", new { id = subcategory.Id, mainName = item.Name, subName = subcategory.Name }, new { @class = "text-white btn btn-primary w-100" })
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            @Html.ActionLink(item.Name, "Details", "Category", new { id = item.Id, name = item.Name }, new { @class = "nav-link text-white btn btn-primary" })
+        }
+    }
+</nav>

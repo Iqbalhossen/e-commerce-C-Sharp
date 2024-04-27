@@ -1,0 +1,129 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Areas.Admin.Models.ProductAdminViewModel
+
+@{
+    if (Model.Name != null)
+    {
+        ViewBag.Title = "Edit " + Model.Name;
+    }
+    else
+    {
+        ViewBag.Title = "New product";
+    }
+
+}
+
+@if (Model.Name != null)
+{
+    <h1>Edit @Model.Name</h1>
+}
+@if (Model.Name == null)
+{
+    <h1>New product</h1>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled" })
+    <hr />
+    @Html.TextBoxForExtended(model => model.Name)
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.Description, new { @class = "input-group-text" })
+        </div>
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.Price, new { @class = "input-group-text" })
+        </div>
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+        <span>@Html.Settings().Currency</span>
+    </div>
+
+    @Html.TextBoxForExtended(model => model.NumberInStock)
+    @Html.TextBoxForExtended(model => model.CatalogNumber)
+
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <div class="input-group-prepend">
+                @Html.LabelFor(model => model.ImageData, "Select image...", new { @class = "custom-file-label" })
+            </div>
+            <input type="file" class="custom-file-input" id="ImageData" name="ImageData">
+            @Html.HiddenFor(model => model.ImageBytes)
+            @Html.HiddenFor(model => model.ImageMimeType)
+        </div>
+    </div>
+
+    <img id="ImgPreview" class="img-fluid d-block mx-auto mb-3" width="150" height="150"
+         src="@Url.Action("GetImage", "ProductAdmin", new { Model.Id })" />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.CategoryId, "Select category...", new { @class = "input-group-text" })
+        </div>
+        @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "---", new { @class = "custom-select" })
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.SubcategoryId, "Select subcategory...", new { @class = "input-group-text" })
+        </div>
+        <select id="SubcategoryId" name="SubcategoryId" class="custom-select">
+            <option value="@Model.SubcategoryId">@Model.SubcategoryName</option>
+            <option value=""> </option>
+        </select>
+    </div>
+
+    @Html.CheckBoxForExtended(model => model.ShowAsSpecialOffer)
+    @Html.CheckBoxForExtended(model => model.ShowAtMainPage)
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Created)
+
+    @Html.EndingFormButtons()
+}
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+
+    <script type="text/javascript" src="~/Scripts/custom/preview-img.js"></script>
+    <script type="text/javascript" src="~/Scripts/custom/decimal-validator.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            if ($("#SubcategoryId").val() == "") {
+                let categoryId = $("#CategoryId").val();
+                if (categoryId != "") {
+                    GetSubcategories(categoryId);
+                }
+            }
+        });
+
+        jQuery("#CategoryId").change(function () {
+            $("#SubcategoryId").empty();
+            if ($(this).val() != "") {
+                GetSubcategories($(this).val());
+            }
+        });
+
+        function GetSubcategories(categoryId) {
+            let catId = categoryId;
+            let subcategoriesHtml = $("#SubcategoryId");
+            $.getJSON({
+                url: "@Url.Action("GetSubcategories", "ProductAdmin")",
+                data: { id: catId },
+                success: function(response) {
+                    subcategoriesHtml.empty();
+                    subcategoriesHtml.append($("<option></option>").text(" "));
+                    $.each(response, function (i, item) {
+                        subcategoriesHtml.append($("<option></option>").text(item.Name).val(item.Id));
+                    });
+                }
+            });
+        }
+    </script>
+}

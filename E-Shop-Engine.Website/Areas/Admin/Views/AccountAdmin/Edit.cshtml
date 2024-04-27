@@ -1,0 +1,28 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Areas.Admin.Models.UserAdminViewModel
+
+@{
+    ViewBag.Title = "Edit Account Information";
+}
+
+<h1>Edit Account Information</h1>
+
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled" })
+    <hr />
+    @Html.HiddenFor(model => model.Id)
+
+    @Html.TextBoxForExtended(model => model.Name)
+    @Html.TextBoxForExtended(model => model.Surname)
+    @Html.TextBoxForExtended(model => model.PhoneNumber)
+    @Html.TextBoxForExtended(model => model.Email)
+
+    @Html.EndingFormButtons()
+}
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+}
+

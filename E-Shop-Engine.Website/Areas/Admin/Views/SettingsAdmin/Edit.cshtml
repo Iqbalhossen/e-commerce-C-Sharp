@@ -1,0 +1,37 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Areas.Admin.Models.SettingsAdminViewModel
+
+@{
+    ViewBag.Title = "Settings";
+}
+
+<h1>Settings</h1>
+
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled" })
+    @Html.HiddenFor(model => model.Id)
+    <hr />
+    @Html.TextBoxForExtended(model => model.ShopName)
+    @Html.TextBoxForExtended(model => model.Currency)
+    @Html.TextBoxForExtended(model => model.ContactEmailAddress)
+    @Html.TextBoxForExtended(model => model.NotificationReplyEmail)
+    @Html.TextBoxForExtended(model => model.SMTP)
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.SMTPEnableSSL, new { @class = "input-group-text" })
+        </div>
+        @Html.EditorFor(model => model.SMTPEnableSSL, new { @class = "form-control" })
+    </div>
+    @Html.TextBoxForExtended(model => model.SMTPPort)
+    @Html.TextBoxForExtended(model => model.DotPayId)
+
+    @Html.CheckBoxForExtended(model => model.IsDotPaySandbox)
+    @Html.EndingFormButtons()
+    <small>You will receive email on save, if your SMTP is set properly. Please check your "Contact Email Address".</small>
+}
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+}

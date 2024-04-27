@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Administration</title>
+    @Scripts.Render("~/Bundles/universal")
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="container-fluid pl-0">
+        <div class="d-flex h-90-vh">
+            <ul class="nav flex-column bg-primary w-auto mr-2">
+                <li class="nav-item">
+                    @Html.ActionLink("Main Page", "Index", "Home", new { area = "" }, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Orders", "Index", "OrderAdmin", null, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Products", "Index", "ProductAdmin", null, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Categories", "Index", "CategoryAdmin", null, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Subcategories", "Index", "SubcategoryAdmin", null, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Users", "Index", "AccountAdmin", null, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Roles", "Index", "RoleAdmin", null, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Settings", "Edit", "SettingsAdmin", null, new { @class = "nav-link text-white btn btn-primary" })
+                </li>
+            </ul>
+
+            <div class="w-auto mx-auto">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    @RenderSection("Scripts", false)
+</body>
+</html>

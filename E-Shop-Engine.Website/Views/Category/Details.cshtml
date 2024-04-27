@@ -1,0 +1,19 @@
+﻿@model E_Shop_Engine.Website.Models.CategoryViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+<div class="w-100 text-center my-4">
+    <div class="text-left">
+        @foreach (var subcategory in Model.Subcategories)
+        {
+            @Html.ActionLink(subcategory.Name, "Details", "Subcategory", new { id = subcategory.Id, mainName = Model.Name, subName = subcategory.Name }, new { @class = "btn btn-primary mr-2 mb-2" })
+        }
+    </div>    
+
+    @Html.Action("ProductsToPagedList", "Product", new { model = Model.Products })
+</div>
+

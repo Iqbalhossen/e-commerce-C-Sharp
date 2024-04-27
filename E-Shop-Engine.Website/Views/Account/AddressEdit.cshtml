@@ -1,0 +1,30 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Models.AddressViewModel
+
+@{
+    ViewBag.Title = "Edit Address";
+}
+
+<h1>Edit Address</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled" })
+    <hr />
+    @Html.HiddenFor(model => model.Id)
+
+    @Html.TextBoxForExtended(model => model.Street)
+    @Html.TextBoxForExtended(model => model.Line1)
+    @Html.TextBoxForExtended(model => model.Line2)
+    @Html.TextBoxForExtended(model => model.City)
+    @Html.TextBoxForExtended(model => model.ZipCode)
+    @Html.TextBoxForExtended(model => model.State)
+    @Html.TextBoxForExtended(model => model.Country)
+
+    @Html.EndingFormButtons()
+}
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+}

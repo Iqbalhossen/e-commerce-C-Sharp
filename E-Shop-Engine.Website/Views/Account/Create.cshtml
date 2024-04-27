@@ -1,0 +1,32 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Models.UserCreateViewModel
+
+@{
+    ViewBag.Title = "Create Account";
+}
+
+<h1>Create Account</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled" })
+    <hr />
+    @Html.TextBoxForExtended(model => model.Name)
+    @Html.TextBoxForExtended(model => model.Surname)
+    @Html.TextBoxForExtended(model => model.PhoneNumber)
+    @Html.TextBoxForExtended(model => model.Email)
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.Password, new { @class = "input-group-text" })
+        </div>
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+    </div>
+
+    @Html.EndingFormButtons()
+}
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+}
+

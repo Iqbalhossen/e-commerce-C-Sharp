@@ -1,0 +1,36 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Models.UserLoginViewModel
+
+@{
+    ViewBag.Title = "Log In";
+}
+
+<h1>Log In</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled" })
+    <hr />
+
+    @Html.TextBoxForExtended(model => model.Email)
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.Password, new { @class = "input-group-text" })
+        </div>
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+    </div>
+    <div class="text-center">
+        <button class="btn btn-success" type="submit">Log In</button>
+    </div>
+}
+
+<div class="text-center my-3">
+    @Html.ActionLink("Reset password?", "ForgotPassword", "Account")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+
+    <script src="~/Scripts/custom/notify.js" type="text/javascript"></script>
+}

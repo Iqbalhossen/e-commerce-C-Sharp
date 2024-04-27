@@ -1,0 +1,49 @@
+﻿@using E_Shop_Engine.Website.Extensions;
+@model E_Shop_Engine.Website.Areas.Admin.Models.SubcategoryAdminViewModel
+
+@{
+    if (Model.Name != null)
+    {
+        ViewBag.Title = "Edit " + Model.Name;
+    }
+    else
+    {
+        ViewBag.Title = "New subcategory";
+    }
+
+}
+
+@if (Model.Name != null)
+{
+    <h1>Edit @Model.Name</h1>
+}
+@if (Model.Name == null)
+{
+    <h1>New subcategory</h1>
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger list-unstyled" })
+    <hr />
+    @Html.HiddenFor(model => model.Id)
+
+    @Html.TextBoxForExtended(model => model.Name)
+
+    @Html.TextBoxForExtended(model => model.Description)
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            @Html.LabelFor(model => model.CategoryID, "Select category...", new { @class = "input-group-text" })
+        </div>
+        @Html.DropDownListFor(model => model.CategoryID, new SelectList(Model.Categories, "Id", "Name"), new { @class = "custom-select" })
+    </div>
+
+    @Html.EndingFormButtons()
+}
+
+@section Scripts {
+    @Scripts.Render("~/Bundles/validate")
+}
